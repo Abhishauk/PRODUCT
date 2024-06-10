@@ -2,7 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from 'cors';
 import adminRoutes from "./routes/adminRoutes.js";
-
+import userRoutes from "./routes/userRoutes.js";
 const app = express();
 const port = 6001;
 
@@ -23,6 +23,7 @@ db.on("disconnected", () => {
   console.log("MongoDB disconnected");
 });
 app.use("/admin", adminRoutes);
+app.use("/", userRoutes);
 
 app.get("/", (req, res) => {
   res.send("hyyyy");

@@ -1,6 +1,7 @@
-
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
+import dotenv from "dotenv";
+dotenv.config();
 
 export const Register = async (req, res) => {
   try {
@@ -16,7 +17,7 @@ export const Register = async (req, res) => {
       vehiclePrice
     } = req.body;
 
-    console.log("FormData:", req.body); 
+    console.log("FormData:", req.body);
 
     // Validate required fields
     if (!name || !email || !phone || !password) {
@@ -27,7 +28,6 @@ export const Register = async (req, res) => {
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
 
-   
     const newUser = new User({
       user_email: email,
       user_location: location,
@@ -36,8 +36,8 @@ export const Register = async (req, res) => {
       vehicle_info: {
         vehicleName,
         vehicleModel,
-        vehicleYear: parseInt(vehicleYear), 
-        vehiclePrice: parseFloat(vehiclePrice) 
+        vehicleYear: parseInt(vehicleYear),
+        vehiclePrice: parseFloat(vehiclePrice)
       }
     });
 
@@ -49,5 +49,38 @@ export const Register = async (req, res) => {
   } catch (error) {
     console.error("Error in Register function:", error);
     res.status(500).json({ error: error.message });
+  }
+};
+
+export const Login = async (req, res) => {
+  try {
+    const { email, password } = req.body;
+    console.log("Request body:", req.body);
+
+    // Validate input
+    if (!email || !password) {
+      return res
+        .status(400)
+        .json({ login: false, msg: "Email and password are required" });
+    }
+
+    // Find the user by email
+    const user = await User.findOne({ user_email: email });
+    console.log("User found:", user);
+
+    if (!user) {
+      return res.status(400).json({ login: false, msg: "User does not exist" });
+    }
+
+    const passMatch = await bcrypt.compare(password, user.password);
+    if (!passMatch) {
+      return res.status(400).json({ login: false, msg: "Invalid password" });
+    }
+   
+
+    res.status(200).json({ msg: "User login successful", user });
+  } catch (error) {
+    console.error("Login error:", error);
+    res.status(500).json({ login: false, msg: "Internal server error" });
   }
 };

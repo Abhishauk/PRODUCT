@@ -14,3 +14,18 @@ export const Register = async formData => {
     throw error;
   }
 };
+
+export const Login = async (values) => {
+  try {
+    console.log(",,,,,",values);
+  
+    const response = await axios.post(
+      "http://localhost:6001/Login",
+      values
+    );
+    return response;
+    
+  } catch (error) {
+    
+  }
+}

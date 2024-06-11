@@ -1,0 +1,48 @@
+/* App.css */
+.header {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .nav {
+    margin-left: auto;
+  }
+  
+  .nav__list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+  }
+  
+  .nav__item {
+    margin-right: 20px;
+  }
+  
+  .nav__item:last-child {
+    margin-right: 0;
+  }
+  
+  .nav__item a {
+    color: #fff;
+    text-decoration: none;
+  }
+  
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .content {
+    margin-top: 20px;
+  }
+  

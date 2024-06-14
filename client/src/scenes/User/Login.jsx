@@ -11,7 +11,7 @@ const UserLogin = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    setError(""); // Clear any previous errors
+    setError(""); 
     setIsLoading(true); // Start loading
 
     if (!email || !password) {
@@ -25,8 +25,8 @@ const UserLogin = () => {
       console.log("response:",response.data.user);
       if (response.status === 200 && response.data.msg === "User login successful") {
         localStorage.setItem("token", response.data.token);
-        setPassword(""); // Clear the password field
-        navigate("/home"); // Navigate to home
+        setPassword("");
+        navigate("/home"); 
       } else {
         setError(response.data.msg || "Login failed. Please try again.");
       }

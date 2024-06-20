@@ -27,7 +27,7 @@ const SignUp = () => {
             throw new Error("Email field is required");
           }
       const response = await Register(formData);
-       // Clear the form data after successful signup
+      
     setFormData({
         name: "",
         email: "",

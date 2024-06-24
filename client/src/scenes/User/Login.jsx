@@ -12,7 +12,7 @@ const UserLogin = () => {
   const handleLogin = async e => {
     e.preventDefault();
     setError("");
-    setIsLoading(true); // Start loading
+    setIsLoading(true);
 
     if (!email || !password) {
       setError("Both email and password are required.");
@@ -37,7 +37,7 @@ const UserLogin = () => {
       console.error("Login error:", error);
       setError("Login failed. Please check your credentials and try again.");
     } finally {
-      setIsLoading(false); // Stop loading
+      setIsLoading(false); 
     }
   };
 
